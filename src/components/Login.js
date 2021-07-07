@@ -23,60 +23,65 @@ class Login extends React.Component {
     }
   };
   login = () => {
-    this.toggleIsSubmitting();
-    var params={login:this.state.username, password:this.state.password};
-    var param={email:'surajgupta8426838667@gmail.com',password:'quickblox'};
-    QB.createSession(param,(errcs,rescs)=>
-    {
-      if(errcs)
-      {
-        console.log("Error occured while creating session");
-        console.log(errcs);
-        this.setState({
-          errorMessage:JSON.stringify(errcs.detail),
-          isSubmitting:false
-        });
-      }
-      else
-      {
-        console.log(" User session created ")
-        console.log(rescs);
-        QB.users.create(params,(errcu,rescu)=>{
-          if(errcu)
-          {
-            QB.login(params,(errlu, reslu) =>{
-              if(errlu)
-              {
-                this.setState({
-                  errorMessage:"User name already taken or password is wrong.",
-                  isSubmitting:false
+    // this.toggleIsSubmitting();
+    // var params={login:this.state.username, password:this.state.password};
+    // var param={email:'surajgupta8426838667@gmail.com',password:'quickblox'};
+    // QB.createSession(param,(errcs,rescs)=>
+    // {
+    //   if(errcs)
+    //   {
+    //     console.log("Error occured while creating session");
+    //     console.log(errcs);
+    //     this.setState({
+    //       errorMessage:JSON.stringify(errcs.detail),
+    //       isSubmitting:false
+    //     });
+    //   }
+    //   else
+    //   {
+    //     console.log(" User session created ")
+    //     console.log(rescs);
+    //     QB.users.create(params,(errcu,rescu)=>{
+    //       if(errcu)
+    //       {
+    //         QB.login(params,(errlu, reslu) =>{
+    //           if(errlu)
+    //           {
+    //             this.setState({
+    //               errorMessage:"User name already taken or password is wrong.",
+    //               isSubmitting:false
 
-                });
-              }
-              else
-              {
-                console.log("Loggedin");
-                console.log(reslu);
-                this.setState({
-                  user:reslu,
-                  isAuthenticated:true
-                });
-              }
-            });
-          }
-          else
-          {
-            console.log("User created");
-            console.log(rescu);
-            this.setState({
-              user:rescu,
-              isAuthenticated:true
-            });
-          }
-        })
+    //             });
+    //           }
+    //           else
+    //           {
+    //             console.log("Loggedin");
+    //             console.log(reslu);
+    //             this.setState({
+    //               user:reslu,
+    //               isAuthenticated:true
+    //             },()=>{
+    //               var prm={user:reslu,password:this.state.password}
+    //               sessionStorage.setItem('profile', JSON.stringify(prm));
+    //               var p=JSON.parse(sessionStorage.getItem('profile'))
+    //               console.log("sessnstorage", p)
+    //             });
+    //           }
+    //         });
+    //       }
+    //       else
+    //       {
+    //         console.log("User created");
+    //         console.log(rescu);
+    //         this.setState({
+    //           user:rescu,
+    //           isAuthenticated:true
+    //         });
+    //       }
+    //     })
 
-      }
-    })
+    //   }
+    // })
  
   };
   toggleIsSubmitting = () => {
@@ -96,21 +101,20 @@ class Login extends React.Component {
     });
   };
   componentDidMount()
-  {
-
+  { 
     
-     var appId= "82520";
-      var authKey= "rR3PTqEcaLATNfP";
-      var authSecret= "DRPH7gkSyCP-JLh";
+    //  var appId= process.env.REACT_APP_APP_ID;
+    //   var authKey= process.env.REACT_APP_AUTH_KEY;
+    //   var authSecret= process.env.REACT_APP_AUTH_Secret ;
+ 
     
-    
-    var CONFIG = {
+    // var CONFIG = {
      
-      streamManagement: {
-        enable: true
-      }
-    };
-    QB.init(appId,authKey,authSecret,CONFIG);
+    //   streamManagement: {
+    //     enable: true
+    //   }
+    // };
+    // QB.init(appId,authKey,authSecret,CONFIG);
   }
  
   render() {
